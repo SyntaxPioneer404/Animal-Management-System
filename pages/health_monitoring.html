@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Monitoring - Zoo Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fzoomanage2444back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Header Navigation -->
+    <header class="bg-surface border-b border-border shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                <circle cx="12" cy="8" r="2"/>
+                                <path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-heading font-bold text-text-primary">Zoo Management</h1>
+                            <p class="text-xs text-text-secondary">Health Monitoring</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="animal_dashboard.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        Dashboard
+                    </a>
+                    <a href="feeding_management.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        Feeding
+                    </a>
+                    <a href="health_monitoring.html" class="text-primary bg-primary-50 px-3 py-2 rounded-md text-sm font-medium">
+                        Health
+                    </a>
+                    <a href="behavioral_tracking.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        Behavior
+                    </a>
+                </nav>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-text-secondary hover:text-primary transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-12"/>
+                        </svg>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="User Avatar" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <span class="text-sm font-medium text-text-primary">Dr. Sarah Wilson</span>
+                    </div>
+                    <button onclick="logout()" class="text-text-secondary hover:text-error transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-text-primary">Health Monitoring</h2>
+                    <p class="mt-2 text-text-secondary">Comprehensive health assessment tracking and veterinary care management</p>
+                </div>
+                <div class="mt-4 sm:mt-0 flex space-x-3">
+                    <button onclick="openHealthAssessmentModal()" class="btn-primary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Log Health Assessment
+                    </button>
+                    <button onclick="scheduleHealthCheck()" class="btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Schedule Health Check
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Status Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Immediate Attention -->
+            <div class="card bg-error-50 border-error-200">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-error-600">Immediate Attention</p>
+                        <p class="text-2xl font-bold text-error-700">3</p>
+                        <p class="text-xs text-error-500">Critical health issues</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overdue Health Checks -->
+            <div class="card bg-warning-50 border-warning-200">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-warning-600">Overdue Checks</p>
+                        <p class="text-2xl font-bold text-warning-700">7</p>
+                        <p class="text-xs text-warning-500">Past due date</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheduled Visits -->
+            <div class="card bg-primary-50 border-primary-200">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-primary-600">Scheduled Visits</p>
+                        <p class="text-2xl font-bold text-primary-700">12</p>
+                        <p class="text-xs text-primary-500">Next 7 days</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Incidents -->
+            <div class="card bg-secondary-50 border-secondary-200">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-secondary-600">Recent Incidents</p>
+                        <p class="text-2xl font-bold text-secondary-700">5</p>
+                        <p class="text-xs text-secondary-500">Last 30 days</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters and Controls -->
+        <div class="card mb-6">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <!-- Health Status Filter -->
+                    <div class="min-w-0 flex-1 sm:max-w-xs">
+                        <label for="healthStatusFilter" class="block text-sm font-medium text-text-primary mb-1">Health Status</label>
+                        <select id="healthStatusFilter" class="input-field">
+                            <option value>All Status</option>
+                            <option value="excellent">Excellent</option>
+                            <option value="good">Good</option>
+                            <option value="concerning">Concerning</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+
+                    <!-- Species Filter -->
+                    <div class="min-w-0 flex-1 sm:max-w-xs">
+                        <label for="speciesFilter" class="block text-sm font-medium text-text-primary mb-1">Species</label>
+                        <select id="speciesFilter" class="input-field">
+                            <option value>All Species</option>
+                            <option value="lion">Lion</option>
+                            <option value="leopard">Leopard</option>
+                            <option value="rhinoceros">Rhinoceros</option>
+                            <option value="elephant">Elephant</option>
+                            <option value="cape-buffalo">Cape Buffalo</option>
+                        </select>
+                    </div>
+
+                    <!-- Veterinary Staff Filter -->
+                    <div class="min-w-0 flex-1 sm:max-w-xs">
+                        <label for="vetFilter" class="block text-sm font-medium text-text-primary mb-1">Veterinary Staff</label>
+                        <select id="vetFilter" class="input-field">
+                            <option value>All Staff</option>
+                            <option value="dr-wilson">Dr. Sarah Wilson</option>
+                            <option value="dr-martinez">Dr. Carlos Martinez</option>
+                            <option value="dr-chen">Dr. Lisa Chen</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex space-x-3">
+                    <button onclick="resetFilters()" class="px-4 py-2 text-text-secondary border border-border rounded-md hover:bg-surface transition-colors">
+                        Reset Filters
+                    </button>
+                    <button onclick="exportHealthReport()" class="btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Export Report
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Monitoring Table -->
+        <div class="card overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-border">
+                    <thead class="bg-primary-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-primary-700 uppercase tracking-wider">
+                                Animal
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-primary-700 uppercase tracking-wider">
+                                Health Status
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-primary-700 uppercase tracking-wider">
+                                Last Check
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-primary-700 uppercase tracking-wider">
+                                Next Appointment
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-primary-700 uppercase tracking-wider">
+                                Assigned Vet
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-primary-700 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="healthTableBody" class="bg-surface divide-y divide-border">
+                        <!-- Table rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Health Assessment Modal -->
+    <div id="healthAssessmentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="bg-surface rounded-lg shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary">Log Health Assessment</h3>
+                        <button onclick="closeHealthAssessmentModal()" class="text-text-secondary hover:text-text-primary">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <form id="healthAssessmentForm" class="space-y-6">
+                        <!-- Animal Selection -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="assessmentAnimal" class="block text-sm font-medium text-text-primary mb-2">Select Animal</label>
+                                <select id="assessmentAnimal" class="input-field" required>
+                                    <option value>Choose an animal</option>
+                                    <option value="simba">Simba (Lion)</option>
+                                    <option value="nala">Nala (Lion)</option>
+                                    <option value="shadow">Shadow (Leopard)</option>
+                                    <option value="thunder">Thunder (Rhinoceros)</option>
+                                    <option value="maya">Maya (Elephant)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="assessmentDate" class="block text-sm font-medium text-text-primary mb-2">Assessment Date</label>
+                                <input type="date" id="assessmentDate" class="input-field" required />
+                            </div>
+                        </div>
+
+                        <!-- Health Status -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Overall Health Status</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <label class="flex items-center p-3 border border-border rounded-md cursor-pointer hover:bg-success-50">
+                                    <input type="radio" name="healthStatus" value="excellent" class="mr-2" />
+                                    <span class="text-sm">Excellent</span>
+                                </label>
+                                <label class="flex items-center p-3 border border-border rounded-md cursor-pointer hover:bg-primary-50">
+                                    <input type="radio" name="healthStatus" value="good" class="mr-2" />
+                                    <span class="text-sm">Good</span>
+                                </label>
+                                <label class="flex items-center p-3 border border-border rounded-md cursor-pointer hover:bg-warning-50">
+                                    <input type="radio" name="healthStatus" value="concerning" class="mr-2" />
+                                    <span class="text-sm">Concerning</span>
+                                </label>
+                                <label class="flex items-center p-3 border border-border rounded-md cursor-pointer hover:bg-error-50">
+                                    <input type="radio" name="healthStatus" value="critical" class="mr-2" />
+                                    <span class="text-sm">Critical</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Examination Fields -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="weight" class="block text-sm font-medium text-text-primary mb-2">Weight (kg)</label>
+                                <input type="number" id="weight" class="input-field" placeholder="Enter weight" />
+                            </div>
+                            <div>
+                                <label for="temperature" class="block text-sm font-medium text-text-primary mb-2">Temperature (°C)</label>
+                                <input type="number" step="0.1" id="temperature" class="input-field" placeholder="Enter temperature" />
+                            </div>
+                        </div>
+
+                        <!-- Condition Scoring -->
+                        <div>
+                            <label for="conditionScore" class="block text-sm font-medium text-text-primary mb-2">Body Condition Score (1-5)</label>
+                            <select id="conditionScore" class="input-field">
+                                <option value>Select score</option>
+                                <option value="1">1 - Emaciated</option>
+                                <option value="2">2 - Thin</option>
+                                <option value="3">3 - Ideal</option>
+                                <option value="4">4 - Overweight</option>
+                                <option value="5">5 - Obese</option>
+                            </select>
+                        </div>
+
+                        <!-- Assessment Notes -->
+                        <div>
+                            <label for="assessmentNotes" class="block text-sm font-medium text-text-primary mb-2">Assessment Notes</label>
+                            <textarea id="assessmentNotes" rows="4" class="input-field" placeholder="Enter detailed assessment notes, observations, and findings..."></textarea>
+                        </div>
+
+                        <!-- Treatment Recommendations -->
+                        <div>
+                            <label for="treatmentRecommendations" class="block text-sm font-medium text-text-primary mb-2">Treatment Recommendations</label>
+                            <textarea id="treatmentRecommendations" rows="3" class="input-field" placeholder="Enter treatment recommendations and follow-up actions..."></textarea>
+                        </div>
+
+                        <!-- Photo Documentation -->
+                        <div>
+                            <label for="healthPhotos" class="block text-sm font-medium text-text-primary mb-2">Photo Documentation</label>
+                            <div class="border-2 border-dashed border-border rounded-md p-4">
+                                <input type="file" id="healthPhotos" multiple accept="image/*" class="hidden" />
+                                <div class="text-center">
+                                    <svg class="mx-auto h-12 w-12 text-text-secondary" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <div class="mt-2">
+                                        <button type="button" onclick="document.getElementById('healthPhotos').click()" class="text-primary hover:text-primary-600">
+                                            Upload photos
+                                        </button>
+                                        <p class="text-text-secondary text-sm">or drag and drop</p>
+                                    </div>
+                                    <p class="text-xs text-text-secondary">PNG, JPG, GIF up to 10MB</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Follow-up Scheduling -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="followUpDate" class="block text-sm font-medium text-text-primary mb-2">Follow-up Date</label>
+                                <input type="date" id="followUpDate" class="input-field" />
+                            </div>
+                            <div>
+                                <label for="assignedVet" class="block text-sm font-medium text-text-primary mb-2">Assigned Veterinarian</label>
+                                <select id="assignedVet" class="input-field">
+                                    <option value>Select veterinarian</option>
+                                    <option value="dr-wilson">Dr. Sarah Wilson</option>
+                                    <option value="dr-martinez">Dr. Carlos Martinez</option>
+                                    <option value="dr-chen">Dr. Lisa Chen</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Emergency Alert -->
+                        <div class="flex items-center">
+                            <input type="checkbox" id="emergencyAlert" class="h-4 w-4 text-error-600 focus:ring-error-500 border-border rounded" />
+                            <label for="emergencyAlert" class="ml-2 block text-sm text-text-primary">
+                                Create emergency health alert
+                            </label>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="flex justify-end space-x-3 pt-6 border-t border-border">
+                            <button type="button" onclick="closeHealthAssessmentModal()" class="px-4 py-2 text-text-secondary border border-border rounded-md hover:bg-surface transition-colors">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                Save Assessment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mock health data
+        const healthData = [
+            {
+                id: 'simba',
+                name: 'Simba',
+                species: 'Lion',
+                healthStatus: 'excellent',
+                lastCheck: '2025-01-15',
+                nextAppointment: '2025-02-15',
+                assignedVet: 'Dr. Sarah Wilson',
+                weight: 190,
+                temperature: 38.2,
+                notes: 'Excellent overall condition. Active and alert.',
+                image: 'https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            },
+            {
+                id: 'nala',
+                name: 'Nala',
+                species: 'Lion',
+                healthStatus: 'good',
+                lastCheck: '2025-01-12',
+                nextAppointment: '2025-02-12',
+                assignedVet: 'Dr. Carlos Martinez',
+                weight: 130,
+                temperature: 38.5,
+                notes: 'Good health, minor dental cleaning needed.',
+                image: 'https://images.pexels.com/photos/162140/lion-predator-dangerous-mane-162140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            },
+            {
+                id: 'shadow',
+                name: 'Shadow',
+                species: 'Leopard',
+                healthStatus: 'concerning',
+                lastCheck: '2025-01-10',
+                nextAppointment: '2025-01-20',
+                assignedVet: 'Dr. Lisa Chen',
+                weight: 65,
+                temperature: 39.1,
+                notes: 'Slight weight loss observed. Monitoring closely.',
+                image: 'https://images.pexels.com/photos/792381/pexels-photo-792381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            },
+            {
+                id: 'thunder',
+                name: 'Thunder',
+                species: 'Rhinoceros',
+                healthStatus: 'critical',
+                lastCheck: '2025-01-18',
+                nextAppointment: '2025-01-19',
+                assignedVet: 'Dr. Sarah Wilson',
+                weight: 2200,
+                temperature: 40.2,
+                notes: 'Respiratory infection. Under intensive treatment.',
+                image: 'https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            },
+            {
+                id: 'maya',
+                name: 'Maya',
+                species: 'Elephant',
+                healthStatus: 'good',
+                lastCheck: '2025-01-14',
+                nextAppointment: '2025-02-14',
+                assignedVet: 'Dr. Carlos Martinez',
+                weight: 4500,
+                temperature: 36.8,
+                notes: 'Healthy and active. Regular checkup completed.',
+                image: 'https://images.pexels.com/photos/66898/elephant-cub-tsavo-kenya-66898.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            }
+        ];
+
+        // Health status configurations
+        const healthStatusConfig = {
+            excellent: { color: 'success', bgColor: 'bg-success-100', textColor: 'text-success-800', icon: '✓' },
+            good: { color: 'primary', bgColor: 'bg-primary-100', textColor: 'text-primary-800', icon: '○' },
+            concerning: { color: 'warning', bgColor: 'bg-warning-100', textColor: 'text-warning-800', icon: '⚠' },
+            critical: { color: 'error', bgColor: 'bg-error-100', textColor: 'text-error-800', icon: '!' }
+        };
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderHealthTable();
+            setupFilters();
+            setTodayDate();
+        });
+
+        // Render health monitoring table
+        function renderHealthTable(filteredData = healthData) {
+            const tbody = document.getElementById('healthTableBody');
+            tbody.innerHTML = '';
+
+            filteredData.forEach(animal => {
+                const statusConfig = healthStatusConfig[animal.healthStatus];
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-primary-50 transition-colors';
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <img class="h-10 w-10 rounded-full object-cover" 
+                                 src="${animal.image}" 
+                                 alt="${animal.name}"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-text-primary">${animal.name}</div>
+                                <div class="text-sm text-text-secondary">${animal.species}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="status-badge ${statusConfig.bgColor} ${statusConfig.textColor}">
+                            ${statusConfig.icon} ${animal.healthStatus.charAt(0).toUpperCase() + animal.healthStatus.slice(1)}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                        ${formatDate(animal.lastCheck)}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                        ${formatDate(animal.nextAppointment)}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                        ${animal.assignedVet}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div class="flex space-x-2">
+                            <button onclick="viewHealthDetails('${animal.id}')" class="text-primary hover:text-primary-600 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                            <button onclick="editHealthRecord('${animal.id}')" class="text-secondary hover:text-secondary-600 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                            ${animal.healthStatus === 'critical' ? `
+                                <button onclick="createEmergencyAlert('${animal.id}')" class="text-error hover:text-error-600 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                    </svg>
+                                </button>
+                            ` : ''}
+                        </div>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // Setup filter functionality
+        function setupFilters() {
+            const filters = ['healthStatusFilter', 'speciesFilter', 'vetFilter'];
+            
+            filters.forEach(filterId => {
+                document.getElementById(filterId).addEventListener('change', applyFilters);
+            });
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const healthStatus = document.getElementById('healthStatusFilter').value;
+            const species = document.getElementById('speciesFilter').value;
+            const vet = document.getElementById('vetFilter').value;
+
+            let filteredData = healthData;
+
+            if (healthStatus) {
+                filteredData = filteredData.filter(animal => animal.healthStatus === healthStatus);
+            }
+
+            if (species) {
+                filteredData = filteredData.filter(animal => animal.species.toLowerCase() === species);
+            }
+
+            if (vet) {
+                const vetName = vet.replace('dr-', 'Dr. ').replace('-', ' ');
+                filteredData = filteredData.filter(animal => animal.assignedVet.toLowerCase().includes(vetName.toLowerCase()));
+            }
+
+            renderHealthTable(filteredData);
+        }
+
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('healthStatusFilter').value = '';
+            document.getElementById('speciesFilter').value = '';
+            document.getElementById('vetFilter').value = '';
+            renderHealthTable();
+        }
+
+        // Modal functions
+        function openHealthAssessmentModal() {
+            document.getElementById('healthAssessmentModal').classList.remove('hidden');
+        }
+
+        function closeHealthAssessmentModal() {
+            document.getElementById('healthAssessmentModal').classList.add('hidden');
+            document.getElementById('healthAssessmentForm').reset();
+        }
+
+        // Set today's date
+        function setTodayDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('assessmentDate').value = today;
+        }
+
+        // Health assessment form submission
+        document.getElementById('healthAssessmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const assessmentData = {
+                animal: formData.get('assessmentAnimal') || document.getElementById('assessmentAnimal').value,
+                date: document.getElementById('assessmentDate').value,
+                healthStatus: formData.get('healthStatus'),
+                weight: document.getElementById('weight').value,
+                temperature: document.getElementById('temperature').value,
+                conditionScore: document.getElementById('conditionScore').value,
+                notes: document.getElementById('assessmentNotes').value,
+                recommendations: document.getElementById('treatmentRecommendations').value,
+                followUpDate: document.getElementById('followUpDate').value,
+                assignedVet: document.getElementById('assignedVet').value,
+                emergencyAlert: document.getElementById('emergencyAlert').checked
+            };
+
+            // Simulate saving assessment
+            console.log('Health Assessment Saved:', assessmentData);
+            
+            // Show success message
+            alert('Health assessment saved successfully!');
+            
+            // Close modal and refresh table
+            closeHealthAssessmentModal();
+            renderHealthTable();
+        });
+
+        // Action functions
+        function scheduleHealthCheck() {
+            alert('Health check scheduling feature would open here');
+        }
+
+        function viewHealthDetails(animalId) {
+            const animal = healthData.find(a => a.id === animalId);
+            if (animal) {
+                window.location.href = `animal_profile.html?id=${animalId}&tab=health`;
+            }
+        }
+
+        function editHealthRecord(animalId) {
+            const animal = healthData.find(a => a.id === animalId);
+            if (animal) {
+                // Pre-fill modal with existing data
+                document.getElementById('assessmentAnimal').value = animalId;
+                document.getElementById('weight').value = animal.weight;
+                document.getElementById('temperature').value = animal.temperature;
+                document.getElementById('assessmentNotes').value = animal.notes;
+                
+                // Set health status radio button
+                const healthStatusRadio = document.querySelector(`input[name="healthStatus"][value="${animal.healthStatus}"]`);
+                if (healthStatusRadio) {
+                    healthStatusRadio.checked = true;
+                }
+                
+                openHealthAssessmentModal();
+            }
+        }
+
+        function createEmergencyAlert(animalId) {
+            const animal = healthData.find(a => a.id === animalId);
+            if (animal) {
+                const confirmed = confirm(`Create emergency health alert for ${animal.name}?\n\nThis will notify all veterinary staff immediately.`);
+                if (confirmed) {
+                    alert(`Emergency alert created for ${animal.name}. All veterinary staff have been notified.`);
+                }
+            }
+        }
+
+        function exportHealthReport() {
+            alert('Health report export feature would generate PDF/Excel report here');
+        }
+
+        // Utility functions
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('healthAssessmentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeHealthAssessmentModal();
+            }
+        });
+    </script>
+</body>
+</html>
