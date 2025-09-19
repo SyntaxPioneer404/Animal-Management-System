@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Zoo Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fzoomanage2444back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-primary-50 via-background to-secondary-50">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="safari-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                    <circle cx="30" cy="30" r="2" fill="currentColor" opacity="0.3"/>
+                    <path d="M15 15l30 30M45 15l-30 30" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#safari-pattern)" class="text-primary"/>
+        </svg>
+    </div>
+
+    <!-- Main Container -->
+    <div class="relative min-h-screen flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-md">
+            <!-- Logo and Header Section -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-primary rounded-2xl mb-6 shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        <circle cx="12" cy="8" r="2"/>
+                        <path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-heading font-bold text-text-primary mb-2">Zoo Management System</h1>
+                <p class="text-text-secondary text-base">Secure access for wildlife care professionals</p>
+            </div>
+
+            <!-- Login Form Card -->
+            <div class="card animate-spring">
+                <form id="loginForm" class="space-y-6">
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-text-primary mb-2">
+                            Email Address
+                        </label>
+                        <div class="relative">
+                            <input type="email" id="email" name="email" class="input-field pl-10" placeholder="Enter your email address" required />
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-text-primary mb-2">
+                            Password
+                        </label>
+                        <div class="relative">
+                            <input type="password" id="password" name="password" class="input-field pl-10 pr-10" placeholder="Enter your password" required />
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <svg class="h-5 w-5 text-text-secondary hover:text-text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Role Selection -->
+                    <div>
+                        <label for="role" class="block text-sm font-medium text-text-primary mb-2">
+                            Access Role
+                        </label>
+                        <div class="relative">
+                            <select id="role" name="role" class="input-field pl-10 appearance-none">
+                                <option value>Select your role</option>
+                                <option value="administrator">Administrator</option>
+                                <option value="veterinary">Veterinary Staff</option>
+                                <option value="zookeeper">Zookeeper</option>
+                            </select>
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                            </div>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me and Forgot Password -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary border-border rounded" />
+                            <label for="remember-me" class="ml-2 block text-sm text-text-secondary">
+                                Remember me
+                            </label>
+                        </div>
+                        <div class="text-sm">
+                            <a href="javascript:void(0)" class="font-medium text-primary hover:text-primary-600 transition-colors">
+                                Forgot password?
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div id="errorMessage" class="hidden bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded-md text-sm">
+                        <div class="flex items-center">
+                            <svg class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                            </svg>
+                            <span id="errorText">Invalid credentials. Please try again.</span>
+                        </div>
+                    </div>
+
+                    <!-- Sign In Button -->
+                    <div>
+                        <button type="submit" id="signInBtn" class="w-full btn-primary py-3 text-base font-semibold relative overflow-hidden group">
+                            <span id="btnText">Sign In</span>
+                            <div id="loadingSpinner" class="hidden absolute inset-0 flex items-center justify-center">
+                                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Demo Credentials -->
+                <div class="mt-6 p-4 bg-primary-50 rounded-lg border border-primary-200">
+                    <h3 class="text-sm font-medium text-primary-700 mb-2">Demo Credentials:</h3>
+                    <div class="text-xs text-primary-600 space-y-1">
+                        <div><strong>Admin:</strong> admin@wildlifezoo.com / admin123</div>
+                        <div><strong>Vet:</strong> vet@wildlifezoo.com / vet456</div>
+                        <div><strong>Keeper:</strong> keeper@wildlifezoo.com / keeper789</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Trust Signals -->
+            <div class="mt-8 text-center">
+                <div class="flex items-center justify-center space-x-4 text-text-secondary text-sm">
+                    <div class="flex items-center">
+                        <svg class="h-4 w-4 mr-1 text-success" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                        </svg>
+                        SSL Secured
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="h-4 w-4 mr-1 text-success" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Data Protected
+                    </div>
+                </div>
+                <p class="mt-4 text-xs text-text-secondary">
+                    © 2025 Wildlife Zoo Management. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Form Handling -->
+    <script>
+        // Mock user credentials
+        const mockUsers = {
+            'admin@wildlifezoo.com': { password: 'admin123', role: 'administrator' },
+            'vet@wildlifezoo.com': { password: 'vet456', role: 'veterinary' },
+            'keeper@wildlifezoo.com': { password: 'keeper789', role: 'zookeeper' }
+        };
+
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const roleSelect = document.getElementById('role');
+        const togglePassword = document.getElementById('togglePassword');
+        const signInBtn = document.getElementById('signInBtn');
+        const btnText = document.getElementById('btnText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            const eyeIcon = this.querySelector('svg');
+            if (type === 'text') {
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>
+                `;
+            } else {
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                `;
+            }
+        });
+
+        // Form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            const role = roleSelect.value;
+
+            // Hide previous error
+            errorMessage.classList.add('hidden');
+
+            // Validation
+            if (!email || !password || !role) {
+                showError('Please fill in all fields.');
+                return;
+            }
+
+            // Show loading state
+            showLoading(true);
+
+            // Simulate API call delay
+            setTimeout(() => {
+                const user = mockUsers[email];
+                
+                if (user && user.password === password && user.role === role) {
+                    // Success - store user data and redirect
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        email: email,
+                        role: role,
+                        loginTime: new Date().toISOString()
+                    }));
+                    
+                    // Redirect to dashboard
+                    window.location.href = 'animal_dashboard.html';
+                } else {
+                    showLoading(false);
+                    if (!user) {
+                        showError('Email address not found.');
+                    } else if (user.password !== password) {
+                        showError('Incorrect password.');
+                    } else if (user.role !== role) {
+                        showError('Selected role does not match your account.');
+                    }
+                }
+            }, 1500);
+        });
+
+        function showLoading(loading) {
+            if (loading) {
+                btnText.classList.add('opacity-0');
+                loadingSpinner.classList.remove('hidden');
+                signInBtn.disabled = true;
+            } else {
+                btnText.classList.remove('opacity-0');
+                loadingSpinner.classList.add('hidden');
+                signInBtn.disabled = false;
+            }
+        }
+
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.classList.remove('hidden');
+            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Auto-fill demo credentials on role selection
+        roleSelect.addEventListener('change', function() {
+            const role = this.value;
+            if (role === 'administrator') {
+                emailInput.value = 'admin@wildlifezoo.com';
+                passwordInput.value = 'admin123';
+            } else if (role === 'veterinary') {
+                emailInput.value = 'vet@wildlifezoo.com';
+                passwordInput.value = 'vet456';
+            } else if (role === 'zookeeper') {
+                emailInput.value = 'keeper@wildlifezoo.com';
+                passwordInput.value = 'keeper789';
+            }
+        });
+
+        // Input validation styling
+        [emailInput, passwordInput, roleSelect].forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    this.classList.add('border-error-300');
+                    this.classList.remove('border-border');
+                } else {
+                    this.classList.remove('border-error-300');
+                    this.classList.add('border-border');
+                }
+            });
+
+            input.addEventListener('input', function() {
+                if (this.classList.contains('border-error-300')) {
+                    this.classList.remove('border-error-300');
+                    this.classList.add('border-border');
+                }
+                errorMessage.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
