@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feeding Management - Zoo Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fzoomanage2444back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Header -->
+    <header class="bg-surface border-b border-border shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Navigation -->
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    <circle cx="12" cy="8" r="2"/>
+                                    <path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <h1 class="text-lg font-heading font-bold text-text-primary">Zoo Management</h1>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Menu -->
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="animal_dashboard.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                            Dashboard
+                        </a>
+                        <a href="feeding_management.html" class="bg-primary-50 text-primary px-3 py-2 rounded-md text-sm font-medium">
+                            Feeding
+                        </a>
+                        <a href="health_monitoring.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                            Health
+                        </a>
+                        <a href="behavioral_tracking.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                            Behavior
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-text-secondary hover:text-primary transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-5a7.5 7.5 0 01-7.5-7.5"/>
+                        </svg>
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-medium">ZK</span>
+                        </div>
+                        <div class="hidden sm:block">
+                            <p class="text-sm font-medium text-text-primary">Zookeeper</p>
+                            <p class="text-xs text-text-secondary">keeper@wildlifezoo.com</p>
+                        </div>
+                    </div>
+                    <a href="login.html" class="text-text-secondary hover:text-primary transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h1 class="text-3xl font-heading font-bold text-text-primary">Feeding Management</h1>
+                    <p class="mt-2 text-text-secondary">Schedule and track feeding activities across all animal species</p>
+                </div>
+                <div class="mt-4 sm:mt-0 flex space-x-3">
+                    <button id="bulkScheduleBtn" class="btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Bulk Schedule
+                    </button>
+                    <button id="addFeedingBtn" class="btn-primary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Add Feeding
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="card mb-6">
+            <div class="flex flex-wrap items-center gap-4">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-text-primary">Filters:</span>
+                </div>
+
+                <select id="speciesFilter" class="input-field w-40">
+                    <option value>All Species</option>
+                    <option value="lion">Lion</option>
+                    <option value="leopard">Leopard</option>
+                    <option value="rhinoceros">Rhinoceros</option>
+                    <option value="elephant">Elephant</option>
+                    <option value="cape-buffalo">Cape Buffalo</option>
+                    <option value="other">Other Species</option>
+                </select>
+
+                <select id="statusFilter" class="input-field w-36">
+                    <option value>All Status</option>
+                    <option value="completed">Completed</option>
+                    <option value="pending">Pending</option>
+                    <option value="overdue">Overdue</option>
+                </select>
+
+                <input type="date" id="dateFilter" class="input-field w-40" value="2025-09-18" />
+
+                <select id="staffFilter" class="input-field w-40">
+                    <option value>All Staff</option>
+                    <option value="john-doe">John Doe</option>
+                    <option value="sarah-wilson">Sarah Wilson</option>
+                    <option value="mike-johnson">Mike Johnson</option>
+                    <option value="emma-davis">Emma Davis</option>
+                </select>
+
+                <button id="resetFilters" class="text-primary hover:text-primary-600 text-sm font-medium">
+                    Reset Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Schedule Overview (Main Section) -->
+            <div class="lg:col-span-3">
+                <!-- Calendar Header -->
+                <div class="card mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-heading font-semibold text-text-primary">Feeding Schedule</h2>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-success rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Completed</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-warning rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Pending</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-error rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Overdue</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calendar Navigation -->
+                    <div class="flex items-center justify-between mb-6">
+                        <button id="prevWeek" class="p-2 hover:bg-primary-50 rounded-md transition-colors">
+                            <svg class="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <h3 class="text-lg font-medium text-text-primary">September 16-22, 2025</h3>
+                        <button id="nextWeek" class="p-2 hover:bg-primary-50 rounded-md transition-colors">
+                            <svg class="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Calendar Grid -->
+                    <div class="grid grid-cols-7 gap-1 mb-4">
+                        <!-- Day Headers -->
+                        <div class="p-3 text-center text-sm font-medium text-text-secondary bg-primary-50 rounded-md">Mon</div>
+                        <div class="p-3 text-center text-sm font-medium text-text-secondary bg-primary-50 rounded-md">Tue</div>
+                        <div class="p-3 text-center text-sm font-medium text-text-secondary bg-primary-50 rounded-md">Wed</div>
+                        <div class="p-3 text-center text-sm font-medium text-text-secondary bg-primary-50 rounded-md">Thu</div>
+                        <div class="p-3 text-center text-sm font-medium text-text-secondary bg-primary-50 rounded-md">Fri</div>
+                        <div class="p-3 text-center text-sm font-medium text-text-secondary bg-primary-50 rounded-md">Sat</div>
+                        <div class="p-3 text-center text-sm font-medium text-text-secondary bg-primary-50 rounded-md">Sun</div>
+                    </div>
+
+                    <!-- Calendar Days -->
+                    <div class="grid grid-cols-7 gap-1">
+                        <!-- Monday -->
+                        <div class="min-h-32 p-2 border border-border rounded-md bg-surface">
+                            <div class="text-sm font-medium text-text-primary mb-2">16</div>
+                            <div class="space-y-1">
+                                <div class="text-xs bg-success-100 text-success-800 px-2 py-1 rounded cursor-pointer hover:bg-success-200 transition-colors">
+                                    Lion - 08:00
+                                </div>
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Elephant - 14:00
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tuesday -->
+                        <div class="min-h-32 p-2 border border-border rounded-md bg-surface">
+                            <div class="text-sm font-medium text-text-primary mb-2">17</div>
+                            <div class="space-y-1">
+                                <div class="text-xs bg-success-100 text-success-800 px-2 py-1 rounded cursor-pointer hover:bg-success-200 transition-colors">
+                                    Leopard - 07:30
+                                </div>
+                                <div class="text-xs bg-success-100 text-success-800 px-2 py-1 rounded cursor-pointer hover:bg-success-200 transition-colors">
+                                    Rhino - 16:00
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Wednesday (Today) -->
+                        <div class="min-h-32 p-2 border-2 border-primary rounded-md bg-primary-50">
+                            <div class="text-sm font-medium text-primary mb-2">18</div>
+                            <div class="space-y-1">
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Lion - 08:00
+                                </div>
+                                <div class="text-xs bg-error-100 text-error-800 px-2 py-1 rounded cursor-pointer hover:bg-error-200 transition-colors">
+                                    Buffalo - 12:00
+                                </div>
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Elephant - 15:30
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thursday -->
+                        <div class="min-h-32 p-2 border border-border rounded-md bg-surface">
+                            <div class="text-sm font-medium text-text-primary mb-2">19</div>
+                            <div class="space-y-1">
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Leopard - 07:30
+                                </div>
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Rhino - 13:00
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Friday -->
+                        <div class="min-h-32 p-2 border border-border rounded-md bg-surface">
+                            <div class="text-sm font-medium text-text-primary mb-2">20</div>
+                            <div class="space-y-1">
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Lion - 08:00
+                                </div>
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Buffalo - 14:30
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Saturday -->
+                        <div class="min-h-32 p-2 border border-border rounded-md bg-surface">
+                            <div class="text-sm font-medium text-text-primary mb-2">21</div>
+                            <div class="space-y-1">
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Elephant - 09:00
+                                </div>
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Rhino - 17:00
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sunday -->
+                        <div class="min-h-32 p-2 border border-border rounded-md bg-surface">
+                            <div class="text-sm font-medium text-text-primary mb-2">22</div>
+                            <div class="space-y-1">
+                                <div class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded cursor-pointer hover:bg-warning-200 transition-colors">
+                                    Leopard - 08:30
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Feeding List -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary">Today's Feeding Schedule</h3>
+                        <span class="text-sm text-text-secondary">September 18, 2025</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Feeding Entry 1 -->
+                        <div class="border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <img src="https://images.pexels.com/photos/33045/lion-wild-africa-african.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Lion" class="w-12 h-12 rounded-lg object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    <div>
+                                        <h4 class="font-medium text-text-primary">Simba - Lion</h4>
+                                        <p class="text-sm text-text-secondary">Enclosure A-1 • Assigned: John Doe</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-text-primary">08:00 AM</p>
+                                        <p class="text-xs text-text-secondary">Raw meat - 15kg</p>
+                                    </div>
+                                    <span class="status-badge status-warning">Pending</span>
+                                    <button class="btn-primary text-sm px-3 py-1">
+                                        Mark Complete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feeding Entry 2 -->
+                        <div class="border border-error-200 bg-error-50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <img src="https://images.pixabay.com/photos/2016/11/14/04/14/buffalo-1822575_1280.jpg" alt="Cape Buffalo" class="w-12 h-12 rounded-lg object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    <div>
+                                        <h4 class="font-medium text-text-primary">Thunder - Cape Buffalo</h4>
+                                        <p class="text-sm text-text-secondary">Enclosure C-3 • Assigned: Sarah Wilson</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-text-primary">12:00 PM</p>
+                                        <p class="text-xs text-text-secondary">Hay & grain - 25kg</p>
+                                    </div>
+                                    <span class="status-badge status-error">Overdue</span>
+                                    <button class="btn-accent text-sm px-3 py-1">
+                                        Feed Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feeding Entry 3 -->
+                        <div class="border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=1000&q=80" alt="Elephant" class="w-12 h-12 rounded-lg object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    <div>
+                                        <h4 class="font-medium text-text-primary">Jumbo - African Elephant</h4>
+                                        <p class="text-sm text-text-secondary">Enclosure B-2 • Assigned: Mike Johnson</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-text-primary">03:30 PM</p>
+                                        <p class="text-xs text-text-secondary">Fruits & vegetables - 50kg</p>
+                                    </div>
+                                    <span class="status-badge status-warning">Pending</span>
+                                    <button class="btn-primary text-sm px-3 py-1">
+                                        Mark Complete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar (Secondary Panel) -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Feeding Alerts -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary">Alerts</h3>
+                        <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="p-3 bg-error-50 border border-error-200 rounded-md">
+                            <div class="flex items-start space-x-2">
+                                <svg class="w-4 h-4 text-error mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                                <div>
+                                    <p class="text-sm font-medium text-error-800">Overdue Feeding</p>
+                                    <p class="text-xs text-error-600">Thunder (Cape Buffalo) - 2 hours late</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-warning-50 border border-warning-200 rounded-md">
+                            <div class="flex items-start space-x-2">
+                                <svg class="w-4 h-4 text-warning mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                                <div>
+                                    <p class="text-sm font-medium text-warning-800">Low Food Stock</p>
+                                    <p class="text-xs text-warning-600">Raw meat supply running low</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Schedule -->
+                <div class="card">
+                    <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Upcoming</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-2 hover:bg-primary-50 rounded-md transition-colors">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Leopard Feeding</p>
+                                <p class="text-xs text-text-secondary">Tomorrow 07:30 AM</p>
+                            </div>
+                            <span class="text-xs text-primary font-medium">Scheduled</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2 hover:bg-primary-50 rounded-md transition-colors">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Rhino Feeding</p>
+                                <p class="text-xs text-text-secondary">Tomorrow 01:00 PM</p>
+                            </div>
+                            <span class="text-xs text-primary font-medium">Scheduled</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2 hover:bg-primary-50 rounded-md transition-colors">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Lion Feeding</p>
+                                <p class="text-xs text-text-secondary">Friday 08:00 AM</p>
+                            </div>
+                            <span class="text-xs text-primary font-medium">Scheduled</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Add Form -->
+                <div class="card">
+                    <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Quick Add Feeding</h3>
+                    <form id="quickAddForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Animal</label>
+                            <select class="input-field text-sm">
+                                <option value>Select animal</option>
+                                <option value="simba">Simba (Lion)</option>
+                                <option value="shadow">Shadow (Leopard)</option>
+                                <option value="rocky">Rocky (Rhinoceros)</option>
+                                <option value="jumbo">Jumbo (Elephant)</option>
+                                <option value="thunder">Thunder (Cape Buffalo)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Food Type</label>
+                            <select class="input-field text-sm">
+                                <option value>Select food type</option>
+                                <option value="raw-meat">Raw Meat</option>
+                                <option value="hay-grain">Hay & Grain</option>
+                                <option value="fruits-vegetables">Fruits & Vegetables</option>
+                                <option value="fish">Fish</option>
+                                <option value="pellets">Pellets</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Quantity (kg)</label>
+                            <input type="number" class="input-field text-sm" placeholder="Enter quantity" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Schedule Time</label>
+                            <input type="datetime-local" class="input-field text-sm" value="2025-09-18T16:00" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Assigned Staff</label>
+                            <select class="input-field text-sm">
+                                <option value>Select staff</option>
+                                <option value="john-doe">John Doe</option>
+                                <option value="sarah-wilson">Sarah Wilson</option>
+                                <option value="mike-johnson">Mike Johnson</option>
+                                <option value="emma-davis">Emma Davis</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full btn-primary text-sm">
+                            Schedule Feeding
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card">
+                    <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Today's Stats</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Total Feedings</span>
+                            <span class="text-sm font-medium text-text-primary">12</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Completed</span>
+                            <span class="text-sm font-medium text-success">8</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Pending</span>
+                            <span class="text-sm font-medium text-warning">3</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Overdue</span>
+                            <span class="text-sm font-medium text-error">1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Feeding Modal -->
+    <div id="addFeedingModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-surface rounded-lg shadow-xl max-w-md w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-heading font-semibold text-text-primary">Add New Feeding</h3>
+                    <button id="closeModal" class="text-text-secondary hover:text-text-primary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <form id="addFeedingForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Animal</label>
+                        <select class="input-field" required>
+                            <option value>Select animal</option>
+                            <option value="simba">Simba (Lion)</option>
+                            <option value="shadow">Shadow (Leopard)</option>
+                            <option value="rocky">Rocky (Rhinoceros)</option>
+                            <option value="jumbo">Jumbo (Elephant)</option>
+                            <option value="thunder">Thunder (Cape Buffalo)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Food Type</label>
+                        <select class="input-field" required>
+                            <option value>Select food type</option>
+                            <option value="raw-meat">Raw Meat</option>
+                            <option value="hay-grain">Hay & Grain</option>
+                            <option value="fruits-vegetables">Fruits & Vegetables</option>
+                            <option value="fish">Fish</option>
+                            <option value="pellets">Pellets</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Quantity</label>
+                            <input type="number" class="input-field" placeholder="Amount" required />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Unit</label>
+                            <select class="input-field" required>
+                                <option value="kg">kg</option>
+                                <option value="lbs">lbs</option>
+                                <option value="pieces">pieces</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Schedule Date & Time</label>
+                        <input type="datetime-local" class="input-field" required />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Assigned Staff</label>
+                        <select class="input-field" required>
+                            <option value>Select staff member</option>
+                            <option value="john-doe">John Doe</option>
+                            <option value="sarah-wilson">Sarah Wilson</option>
+                            <option value="mike-johnson">Mike Johnson</option>
+                            <option value="emma-davis">Emma Davis</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Special Instructions</label>
+                        <textarea class="input-field" rows="3" placeholder="Any special feeding instructions..."></textarea>
+                    </div>
+
+                    <div class="flex space-x-3 pt-4">
+                        <button type="button" id="cancelModal" class="flex-1 px-4 py-2 border border-border text-text-secondary rounded-md hover:bg-primary-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 btn-primary">
+                            Schedule Feeding
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // DOM Elements
+        const addFeedingBtn = document.getElementById('addFeedingBtn');
+        const addFeedingModal = document.getElementById('addFeedingModal');
+        const closeModal = document.getElementById('closeModal');
+        const cancelModal = document.getElementById('cancelModal');
+        const addFeedingForm = document.getElementById('addFeedingForm');
+        const quickAddForm = document.getElementById('quickAddForm');
+        const resetFilters = document.getElementById('resetFilters');
+
+        // Filter elements
+        const speciesFilter = document.getElementById('speciesFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const dateFilter = document.getElementById('dateFilter');
+        const staffFilter = document.getElementById('staffFilter');
+
+        // Modal functionality
+        addFeedingBtn.addEventListener('click', () => {
+            addFeedingModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        [closeModal, cancelModal].forEach(btn => {
+            btn.addEventListener('click', () => {
+                addFeedingModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Close modal on outside click
+        addFeedingModal.addEventListener('click', (e) => {
+            if (e.target === addFeedingModal) {
+                addFeedingModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form submissions
+        addFeedingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate form submission
+            alert('Feeding scheduled successfully!');
+            addFeedingModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            addFeedingForm.reset();
+        });
+
+        quickAddForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate form submission
+            alert('Quick feeding scheduled successfully!');
+            quickAddForm.reset();
+        });
+
+        // Filter functionality
+        function applyFilters() {
+            const species = speciesFilter.value;
+            const status = statusFilter.value;
+            const date = dateFilter.value;
+            const staff = staffFilter.value;
+
+            // Simulate filtering (in real app, this would filter the displayed data)
+            console.log('Applying filters:', { species, status, date, staff });
+        }
+
+        [speciesFilter, statusFilter, dateFilter, staffFilter].forEach(filter => {
+            filter.addEventListener('change', applyFilters);
+        });
+
+        resetFilters.addEventListener('click', () => {
+            speciesFilter.value = '';
+            statusFilter.value = '';
+            dateFilter.value = '2025-09-18';
+            staffFilter.value = '';
+            applyFilters();
+        });
+
+        // Calendar navigation
+        document.getElementById('prevWeek').addEventListener('click', () => {
+            // Simulate week navigation
+            console.log('Previous week');
+        });
+
+        document.getElementById('nextWeek').addEventListener('click', () => {
+            // Simulate week navigation
+            console.log('Next week');
+        });
+
+        // Bulk schedule functionality
+        document.getElementById('bulkScheduleBtn').addEventListener('click', () => {
+            alert('Bulk schedule feature would open here');
+        });
+
+        // Mark complete buttons
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            if (btn.textContent.trim() === 'Mark Complete') {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const entry = btn.closest('.border');
+                    const badge = entry.querySelector('.status-badge');
+                    badge.className = 'status-badge status-success';
+                    badge.textContent = 'Completed';
+                    btn.textContent = 'Completed';
+                    btn.disabled = true;
+                    btn.classList.add('opacity-50', 'cursor-not-allowed');
+                });
+            }
+        });
+
+        // Feed now buttons
+        document.querySelectorAll('.btn-accent').forEach(btn => {
+            if (btn.textContent.trim() === 'Feed Now') {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const entry = btn.closest('.border');
+                    const badge = entry.querySelector('.status-badge');
+                    badge.className = 'status-badge status-success';
+                    badge.textContent = 'Completed';
+                    btn.textContent = 'Completed';
+                    btn.disabled = true;
+                    btn.classList.remove('btn-accent');
+                    btn.classList.add('btn-primary', 'opacity-50', 'cursor-not-allowed');
+                    entry.classList.remove('border-error-200', 'bg-error-50');
+                    entry.classList.add('border-border', 'bg-surface');
+                });
+            }
+        });
+
+        // Calendar day clicks
+        document.querySelectorAll('.grid-cols-7 .min-h-32').forEach(day => {
+            day.addEventListener('click', (e) => {
+                if (e.target.classList.contains('text-xs')) {
+                    // Clicked on a feeding entry
+                    const feedingText = e.target.textContent;
+                    alert(`Viewing details for: ${feedingText}`);
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current date
+            const today = new Date().toISOString().split('T')[0];
+            dateFilter.value = today;
+            
+            // Apply initial filters
+            applyFilters();
+        });
+    </script>
+</body>
+</html>
