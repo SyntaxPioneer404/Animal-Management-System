@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animal Profile - Zoo Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fzoomanage2444back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-surface border-b border-border shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="inline-flex items-center justify-center w-10 h-10 bg-primary rounded-lg">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                <circle cx="12" cy="8" r="2"/>
+                                <path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h1 class="text-xl font-heading font-bold text-text-primary">Zoo Management</h1>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="animal_dashboard.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        Dashboard
+                    </a>
+                    <a href="feeding_management.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        Feeding
+                    </a>
+                    <a href="health_monitoring.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        Health
+                    </a>
+                    <a href="behavioral_tracking.html" class="text-text-secondary hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        Behavior
+                    </a>
+                </nav>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                            <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="User avatar" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </button>
+                        <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-md shadow-lg py-1 z-50 border border-border">
+                            <a href="login.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <nav class="flex mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="animal_dashboard.html" class="inline-flex items-center text-sm font-medium text-text-secondary hover:text-primary">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="ml-1 text-sm font-medium text-text-primary">Animal Profile</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- Animal Header Section -->
+        <div class="card mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div class="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <!-- Animal Photo -->
+                    <div class="relative">
+                        <img id="animalPhoto" class="w-24 h-24 rounded-xl object-cover border-2 border-border" src="https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Animal Photo" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <button class="absolute -bottom-2 -right-2 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Animal Info -->
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <h2 id="animalName" class="text-2xl font-heading font-bold text-text-primary">Simba</h2>
+                            <span id="animalGender" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-100 text-secondary-800">
+                                Male
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4 text-sm text-text-secondary mb-3">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                                </svg>
+                                <span id="animalSpecies">African Lion</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <span id="animalAge">8 years old</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <span id="animalLocation">Savanna Enclosure A</span>
+                            </div>
+                        </div>
+                        <!-- Status Indicators -->
+                        <div class="flex flex-wrap gap-2">
+                            <span id="healthStatus" class="status-badge status-success">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Healthy
+                            </span>
+                            <span id="feedingStatus" class="status-badge status-success">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Fed Today
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 mt-6 lg:mt-0">
+                    <div class="relative">
+                        <button id="logCareBtn" class="btn-primary flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            Log Care Activity
+                        </button>
+                        <div id="careDropdown" class="hidden absolute right-0 mt-2 w-56 bg-surface rounded-md shadow-lg py-1 z-50 border border-border">
+                            <a href="feeding_management.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary">Log Feeding</a>
+                            <a href="health_monitoring.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary">Health Check</a>
+                            <a href="behavioral_tracking.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary">Behavioral Note</a>
+                        </div>
+                    </div>
+                    <button class="btn-secondary flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Schedule Health Check
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabbed Content -->
+        <div class="card">
+            <!-- Tab Navigation -->
+            <div class="border-b border-border">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <button class="tab-button active" data-tab="basic">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Basic Information
+                    </button>
+                    <button class="tab-button" data-tab="history">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Care History
+                    </button>
+                    <button class="tab-button" data-tab="health">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                        Health Records
+                    </button>
+                    <button class="tab-button" data-tab="gallery">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Photo Gallery
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="pt-6">
+                <!-- Basic Information Tab -->
+                <div id="basic-tab" class="tab-content active">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Registration Details -->
+                        <div>
+                            <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Registration Details</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Animal ID</label>
+                                    <input type="text" value="ZOO-2017-001" class="input-field" readonly />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Name</label>
+                                    <input type="text" value="Simba" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Species</label>
+                                    <select class="input-field">
+                                        <option value="african-lion" selected>African Lion</option>
+                                        <option value="leopard">Leopard</option>
+                                        <option value="rhinoceros">Rhinoceros</option>
+                                        <option value="elephant">Elephant</option>
+                                        <option value="cape-buffalo">Cape Buffalo</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Date of Birth</label>
+                                    <input type="date" value="2017-03-15" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Acquisition Date</label>
+                                    <input type="date" value="2017-06-20" class="input-field" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Physical Characteristics -->
+                        <div>
+                            <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Physical Characteristics</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Gender</label>
+                                    <select class="input-field">
+                                        <option value="male" selected>Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Weight (kg)</label>
+                                    <input type="number" value="190" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Height (cm)</label>
+                                    <input type="number" value="120" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Distinctive Markings</label>
+                                    <textarea class="input-field h-20" placeholder="Describe any distinctive markings...">Scar on left shoulder, darker mane coloration</textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-1">Enclosure Location</label>
+                                    <select class="input-field">
+                                        <option value="savanna-a" selected>Savanna Enclosure A</option>
+                                        <option value="savanna-b">Savanna Enclosure B</option>
+                                        <option value="quarantine">Quarantine Area</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-8 pt-6 border-t border-border">
+                        <button class="btn-primary">Save Changes</button>
+                    </div>
+                </div>
+
+                <!-- Care History Tab -->
+                <div id="history-tab" class="tab-content">
+                    <!-- Filter Controls -->
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary mb-4 sm:mb-0">Care Activity Timeline</h3>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <select class="input-field w-full sm:w-auto">
+                                <option value>All Activities</option>
+                                <option value="feeding">Feeding</option>
+                                <option value="health">Health Check</option>
+                                <option value="behavior">Behavioral Note</option>
+                            </select>
+                            <input type="date" class="input-field w-full sm:w-auto" value="2025-01-18" />
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="space-y-4">
+                        <!-- Timeline Item -->
+                        <div class="flex items-start space-x-4 p-4 bg-primary-50 rounded-lg border border-primary-200">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-success rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium text-text-primary">Morning Feeding Completed</p>
+                                    <p class="text-sm text-text-secondary">Today, 8:30 AM</p>
+                                </div>
+                                <p class="text-sm text-text-secondary mt-1">Fed 15kg of meat. Animal showed normal appetite and behavior.</p>
+                                <p class="text-xs text-text-secondary mt-2">Staff: Dr. Sarah Johnson</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="flex items-start space-x-4 p-4 bg-secondary-50 rounded-lg border border-secondary-200">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-warning rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium text-text-primary">Behavioral Observation</p>
+                                    <p class="text-sm text-text-secondary">Yesterday, 2:15 PM</p>
+                                </div>
+                                <p class="text-sm text-text-secondary mt-1">Observed increased territorial marking behavior. Possibly related to nearby construction noise.</p>
+                                <p class="text-xs text-text-secondary mt-2">Staff: Mike Thompson</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="flex items-start space-x-4 p-4 bg-accent-50 rounded-lg border border-accent-200">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-error rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium text-text-primary">Health Check Completed</p>
+                                    <p class="text-sm text-text-secondary">Jan 15, 10:00 AM</p>
+                                </div>
+                                <p class="text-sm text-text-secondary mt-1">Routine health examination. All vitals normal. Weight: 190kg. No concerns noted.</p>
+                                <p class="text-xs text-text-secondary mt-2">Staff: Dr. Emily Chen</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="text-center mt-6">
+                        <button class="btn-secondary">Load More Activities</button>
+                    </div>
+                </div>
+
+                <!-- Health Records Tab -->
+                <div id="health-tab" class="tab-content">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Recent Health Assessments -->
+                        <div>
+                            <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Recent Health Assessments</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 border border-border rounded-lg">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-medium text-text-primary">Routine Check-up</h4>
+                                        <span class="status-badge status-success">Normal</span>
+                                    </div>
+                                    <p class="text-sm text-text-secondary mb-2">Jan 15, 2025 - Dr. Emily Chen</p>
+                                    <p class="text-sm text-text-secondary">Weight: 190kg, Temperature: 38.5°C, Heart Rate: 45 BPM</p>
+                                </div>
+                                <div class="p-4 border border-border rounded-lg">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-medium text-text-primary">Dental Examination</h4>
+                                        <span class="status-badge status-warning">Minor Issue</span>
+                                    </div>
+                                    <p class="text-sm text-text-secondary mb-2">Dec 20, 2024 - Dr. Sarah Johnson</p>
+                                    <p class="text-sm text-text-secondary">Minor tartar buildup on molars. Scheduled for cleaning.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vaccination Schedule -->
+                        <div>
+                            <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Vaccination Schedule</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 border border-border rounded-lg">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-medium text-text-primary">Rabies Vaccination</h4>
+                                        <span class="status-badge status-success">Current</span>
+                                    </div>
+                                    <p class="text-sm text-text-secondary">Last: Mar 15, 2024 | Next: Mar 15, 2025</p>
+                                </div>
+                                <div class="p-4 border border-border rounded-lg">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-medium text-text-primary">Distemper Vaccination</h4>
+                                        <span class="status-badge status-warning">Due Soon</span>
+                                    </div>
+                                    <p class="text-sm text-text-secondary">Last: Feb 10, 2024 | Next: Feb 10, 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical History -->
+                    <div class="mt-8">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Medical History</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-border">
+                                <thead class="bg-primary-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Date</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Treatment</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Veterinarian</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-surface divide-y divide-border">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">Jan 15, 2025</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Routine Health Check</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Dr. Emily Chen</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="status-badge status-success">Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">Dec 20, 2024</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Dental Cleaning</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Dr. Sarah Johnson</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="status-badge status-warning">Scheduled</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Gallery Tab -->
+                <div id="gallery-tab" class="tab-content">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary">Photo Gallery</h3>
+                        <button class="btn-primary flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            Upload Photos
+                        </button>
+                    </div>
+
+                    <!-- Photo Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- Photo Item -->
+                        <div class="relative group">
+                            <img src="https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Animal Photo" class="w-full h-32 object-cover rounded-lg border border-border" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200 rounded-lg flex items-center justify-center">
+                                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex space-x-2">
+                                    <button class="p-2 bg-white rounded-full text-text-primary hover:bg-primary-50">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="p-2 bg-white rounded-full text-error hover:bg-error-50">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 left-2 right-2">
+                                <p class="text-xs text-white bg-black bg-opacity-50 px-2 py-1 rounded">Jan 15, 2025</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo Item -->
+                        <div class="relative group">
+                            <img src="https://images.pixabay.com/photo-2018/04/13/21/24/lion-3317670_1280.jpg" alt="Animal Photo" class="w-full h-32 object-cover rounded-lg border border-border" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200 rounded-lg flex items-center justify-center">
+                                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex space-x-2">
+                                    <button class="p-2 bg-white rounded-full text-text-primary hover:bg-primary-50">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="p-2 bg-white rounded-full text-error hover:bg-error-50">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 left-2 right-2">
+                                <p class="text-xs text-white bg-black bg-opacity-50 px-2 py-1 rounded">Jan 10, 2025</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo Item -->
+                        <div class="relative group">
+                            <img src="https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Animal Photo" class="w-full h-32 object-cover rounded-lg border border-border" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200 rounded-lg flex items-center justify-center">
+                                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex space-x-2">
+                                    <button class="p-2 bg-white rounded-full text-text-primary hover:bg-primary-50">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="p-2 bg-white rounded-full text-error hover:bg-error-50">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 left-2 right-2">
+                                <p class="text-xs text-white bg-black bg-opacity-50 px-2 py-1 rounded">Jan 5, 2025</p>
+                            </div>
+                        </div>
+
+                        <!-- Upload Placeholder -->
+                        <div class="border-2 border-dashed border-border rounded-lg h-32 flex items-center justify-center hover:border-primary transition-colors cursor-pointer">
+                            <div class="text-center">
+                                <svg class="w-8 h-8 text-text-secondary mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                <p class="text-xs text-text-secondary">Add Photo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                button.classList.add('active');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+
+        // User menu dropdown
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userMenu = document.getElementById('userMenu');
+
+        userMenuButton.addEventListener('click', () => {
+            userMenu.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!userMenuButton.contains(e.target) && !userMenu.contains(e.target)) {
+                userMenu.classList.add('hidden');
+            }
+        });
+
+        // Care activity dropdown
+        const logCareBtn = document.getElementById('logCareBtn');
+        const careDropdown = document.getElementById('careDropdown');
+
+        logCareBtn.addEventListener('click', () => {
+            careDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!logCareBtn.contains(e.target) && !careDropdown.contains(e.target)) {
+                careDropdown.classList.add('hidden');
+            }
+        });
+
+        // Check authentication
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <style>
+        .tab-button {
+            @apply whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-text-secondary hover:text-text-primary hover:border-border transition-all duration-200 flex items-center;
+        }
+
+        .tab-button.active {
+            @apply border-primary text-primary;
+        }
+
+        .tab-content {
+            @apply hidden;
+        }
+
+        .tab-content.active {
+            @apply block;
+        }
+    </style>
+</body>
+</html>
