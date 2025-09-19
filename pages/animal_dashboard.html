@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animal Dashboard - Zoo Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fzoomanage2444back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Header -->
+    <header class="bg-surface border-b border-border shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Navigation -->
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-10 h-10 bg-primary rounded-lg mr-3">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                <circle cx="12" cy="8" r="2"/>
+                                <path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-heading font-bold text-text-primary">Zoo Management</h1>
+                    </div>
+                    
+                    <!-- Navigation Menu -->
+                    <nav class="hidden md:flex space-x-6">
+                        <a href="animal_dashboard.html" class="text-primary font-medium border-b-2 border-primary pb-1">Dashboard</a>
+                        <a href="feeding_management.html" class="text-text-secondary hover:text-primary transition-colors">Feeding</a>
+                        <a href="health_monitoring.html" class="text-text-secondary hover:text-primary transition-colors">Health</a>
+                        <a href="behavioral_tracking.html" class="text-text-secondary hover:text-primary transition-colors">Behavior</a>
+                    </nav>
+                </div>
+
+                <!-- User Profile and Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Notifications -->
+                    <button class="relative p-2 text-text-secondary hover:text-primary transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5-5V9a6 6 0 10-12 0v3l-5 5h5m7 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                        </svg>
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+                    </button>
+
+                    <!-- User Menu -->
+                    <div class="flex items-center space-x-3">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-sm font-medium text-text-primary" id="userName">Dr. Sarah Johnson</p>
+                            <p class="text-xs text-text-secondary" id="userRole">Veterinary Staff</p>
+                        </div>
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-medium">SJ</span>
+                        </div>
+                        <button onclick="logout()" class="text-text-secondary hover:text-error transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-text-primary">Animal Dashboard</h2>
+                    <p class="mt-2 text-text-secondary">Comprehensive overview of all animal care operations</p>
+                </div>
+                <div class="mt-4 sm:mt-0 flex space-x-3">
+                    <button class="btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Export Report
+                    </button>
+                    <button class="btn-primary" onclick="showAddAnimalModal()">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Add New Animal
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Animals -->
+            <div class="card animate-spring">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-text-secondary">Total Animals</p>
+                        <p class="text-2xl font-bold text-text-primary">47</p>
+                        <p class="text-xs text-success">+3 this month</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feeding Alerts -->
+            <div class="card animate-spring">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-text-secondary">Feeding Alerts</p>
+                        <p class="text-2xl font-bold text-text-primary">8</p>
+                        <p class="text-xs text-warning">Requires attention</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Checks Due -->
+            <div class="card animate-spring">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-text-secondary">Health Checks Due</p>
+                        <p class="text-2xl font-bold text-text-primary">12</p>
+                        <p class="text-xs text-error">Overdue: 3</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Behavioral Incidents -->
+            <div class="card animate-spring">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-text-secondary">Recent Incidents</p>
+                        <p class="text-2xl font-bold text-text-primary">5</p>
+                        <p class="text-xs text-accent">Last 7 days</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Animal Grid Section -->
+            <div class="lg:col-span-3">
+                <!-- Filter Controls -->
+                <div class="card mb-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 sm:space-x-4">
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 flex-1">
+                            <!-- Search -->
+                            <div class="relative flex-1 max-w-md">
+                                <input type="text" id="searchInput" placeholder="Search animals..." class="input-field pl-10" onkeyup="filterAnimals()" />
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Species Filter -->
+                            <select id="speciesFilter" class="input-field" onchange="filterAnimals()">
+                                <option value>All Species</option>
+                                <option value="lion">Lion</option>
+                                <option value="leopard">Leopard</option>
+                                <option value="rhinoceros">Rhinoceros</option>
+                                <option value="elephant">Elephant</option>
+                                <option value="buffalo">Cape Buffalo</option>
+                            </select>
+
+                            <!-- Health Status Filter -->
+                            <select id="healthFilter" class="input-field" onchange="filterAnimals()">
+                                <option value>All Health Status</option>
+                                <option value="excellent">Excellent</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="poor">Poor</option>
+                            </select>
+
+                            <!-- Feeding Status Filter -->
+                            <select id="feedingFilter" class="input-field" onchange="filterAnimals()">
+                                <option value>All Feeding Status</option>
+                                <option value="fed">Fed</option>
+                                <option value="pending">Pending</option>
+                                <option value="overdue">Overdue</option>
+                            </select>
+                        </div>
+
+                        <!-- Filter Actions -->
+                        <div class="flex space-x-2">
+                            <button onclick="resetFilters()" class="px-3 py-2 text-sm text-text-secondary hover:text-primary transition-colors">
+                                <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                </svg>
+                                Reset
+                            </button>
+                            <button class="px-3 py-2 text-sm bg-primary-50 text-primary rounded-md hover:bg-primary-100 transition-colors">
+                                <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                                </svg>
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animal Grid -->
+                <div id="animalGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <!-- Animal cards will be populated by JavaScript -->
+                </div>
+
+                <!-- Bulk Actions -->
+                <div class="mt-6 flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <input type="checkbox" id="selectAll" class="h-4 w-4 text-primary focus:ring-primary border-border rounded" />
+                        <label for="selectAll" class="text-sm text-text-secondary">Select All</label>
+                        <span id="selectedCount" class="text-sm text-text-secondary">0 selected</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="bulkFeedBtn" class="btn-secondary opacity-50 cursor-not-allowed" disabled>
+                            Bulk Feed
+                        </button>
+                        <button id="bulkHealthBtn" class="btn-secondary opacity-50 cursor-not-allowed" disabled>
+                            Health Check
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Feed Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary">Recent Activity</h3>
+                        <button class="text-primary hover:text-primary-600 text-sm">View All</button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Activity Item -->
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-8 h-8 bg-success-100 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm text-text-primary">
+                                    <span class="font-medium">Simba</span> fed successfully
+                                </p>
+                                <p class="text-xs text-text-secondary">by Dr. Johnson • 2 hours ago</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item -->
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-8 h-8 bg-warning-100 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-warning" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm text-text-primary">
+                                    <span class="font-medium">Kesi</span> health check overdue
+                                </p>
+                                <p class="text-xs text-text-secondary">Alert • 4 hours ago</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item -->
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm text-text-primary">
+                                    Behavioral observation logged for <span class="font-medium">Temba</span>
+                                </p>
+                                <p class="text-xs text-text-secondary">by K. Williams • 6 hours ago</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item -->
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm text-text-primary">
+                                    New animal <span class="font-medium">Jengo</span> added to system
+                                </p>
+                                <p class="text-xs text-text-secondary">by Admin • 1 day ago</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Urgent Alerts Section -->
+                    <div class="mt-6 pt-4 border-t border-border">
+                        <h4 class="text-sm font-medium text-text-primary mb-3">Urgent Alerts</h4>
+                        <div class="space-y-2">
+                            <div class="p-3 bg-error-50 border border-error-200 rounded-md">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 text-error mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span class="text-sm text-error-700 font-medium">3 animals require immediate attention</span>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-warning-50 border border-warning-200 rounded-md">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 text-warning mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span class="text-sm text-warning-700 font-medium">8 feeding schedules pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Animal Modal -->
+    <div id="addAnimalModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-surface rounded-lg shadow-xl max-w-md w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-heading font-semibold text-text-primary">Add New Animal</h3>
+                    <button onclick="hideAddAnimalModal()" class="text-text-secondary hover:text-text-primary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form id="addAnimalForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Animal Name</label>
+                        <input type="text" class="input-field" placeholder="Enter animal name" required />
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Species</label>
+                        <select class="input-field" required>
+                            <option value>Select species</option>
+                            <option value="lion">Lion</option>
+                            <option value="leopard">Leopard</option>
+                            <option value="rhinoceros">Rhinoceros</option>
+                            <option value="elephant">Elephant</option>
+                            <option value="buffalo">Cape Buffalo</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Age</label>
+                        <input type="number" class="input-field" placeholder="Age in years" required />
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-1">Gender</label>
+                        <select class="input-field" required>
+                            <option value>Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex space-x-3 pt-4">
+                        <button type="button" onclick="hideAddAnimalModal()" class="flex-1 px-4 py-2 border border-border text-text-secondary rounded-md hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 btn-primary">
+                            Add Animal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mock animal data
+        const mockAnimals = [
+            {
+                id: 1,
+                name: "Simba",
+                species: "lion",
+                age: 8,
+                gender: "male",
+                healthStatus: "excellent",
+                feedingStatus: "fed",
+                lastActivity: "2 hours ago",
+                image: "https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=400",
+                enclosure: "Savanna A1"
+            },
+            {
+                id: 2,
+                name: "Nala",
+                species: "lion",
+                age: 6,
+                gender: "female",
+                healthStatus: "good",
+                feedingStatus: "pending",
+                lastActivity: "4 hours ago",
+                image: "https://images.pexels.com/photos/162140/lion-predator-dangerous-safari-162140.jpeg?auto=compress&cs=tinysrgb&w=400",
+                enclosure: "Savanna A2"
+            },
+            {
+                id: 3,
+                name: "Kesi",
+                species: "elephant",
+                age: 15,
+                gender: "female",
+                healthStatus: "fair",
+                feedingStatus: "overdue",
+                lastActivity: "6 hours ago",
+                image: "https://images.pixabay.com/photo/2016/11/14/04/14/elephant-1822636_960_720.jpg",
+                enclosure: "Elephant Valley"
+            },
+            {
+                id: 4,
+                name: "Temba",
+                species: "rhinoceros",
+                age: 12,
+                gender: "male",
+                healthStatus: "excellent",
+                feedingStatus: "fed",
+                lastActivity: "1 hour ago",
+                image: "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=400&q=80",
+                enclosure: "Rhino Ridge"
+            },
+            {
+                id: 5,
+                name: "Jengo",
+                species: "leopard",
+                age: 5,
+                gender: "male",
+                healthStatus: "good",
+                feedingStatus: "fed",
+                lastActivity: "3 hours ago",
+                image: "https://images.pexels.com/photos/792381/pexels-photo-792381.jpeg?auto=compress&cs=tinysrgb&w=400",
+                enclosure: "Forest Glen"
+            },
+            {
+                id: 6,
+                name: "Amara",
+                species: "buffalo",
+                age: 9,
+                gender: "female",
+                healthStatus: "good",
+                feedingStatus: "pending",
+                lastActivity: "5 hours ago",
+                image: "https://images.pixabay.com/photo/2019/06/20/14/39/buffalo-4287098_960_720.jpg",
+                enclosure: "Plains B1"
+            }
+        ];
+
+        let filteredAnimals = [...mockAnimals];
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadUserInfo();
+            renderAnimals();
+        });
+
+        function checkAuth() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+        }
+
+        function loadUserInfo() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const userNames = {
+                'admin@wildlifezoo.com': 'Dr. Michael Chen',
+                'vet@wildlifezoo.com': 'Dr. Sarah Johnson',
+                'keeper@wildlifezoo.com': 'Kevin Williams'
+            };
+            const roleNames = {
+                'administrator': 'Administrator',
+                'veterinary': 'Veterinary Staff',
+                'zookeeper': 'Zookeeper'
+            };
+
+            document.getElementById('userName').textContent = userNames[currentUser.email] || 'User';
+            document.getElementById('userRole').textContent = roleNames[currentUser.role] || 'Staff';
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+
+        function renderAnimals() {
+            const grid = document.getElementById('animalGrid');
+            grid.innerHTML = '';
+
+            filteredAnimals.forEach(animal => {
+                const card = createAnimalCard(animal);
+                grid.appendChild(card);
+            });
+        }
+
+        function createAnimalCard(animal) {
+            const card = document.createElement('div');
+            card.className = 'card hover:shadow-lg transition-all duration-200 cursor-pointer';
+            card.onclick = () => viewAnimalProfile(animal.id);
+
+            const healthStatusClass = {
+                'excellent': 'status-success',
+                'good': 'status-success',
+                'fair': 'status-warning',
+                'poor': 'status-error'
+            }[animal.healthStatus];
+
+            const feedingStatusClass = {
+                'fed': 'status-success',
+                'pending': 'status-warning',
+                'overdue': 'status-error'
+            }[animal.feedingStatus];
+
+            card.innerHTML = `
+                <div class="relative">
+                    <div class="aspect-w-16 aspect-h-9 mb-4">
+                        <img 
+                            src="${animal.image}" 
+                            alt="${animal.name}"
+                            class="w-full h-48 object-cover rounded-lg"
+                            onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;"
+                        >
+                    </div>
+                    
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h3 class="text-lg font-heading font-semibold text-text-primary">${animal.name}</h3>
+                            <p class="text-sm text-text-secondary capitalize">${animal.species} • ${animal.age} years • ${animal.gender}</p>
+                        </div>
+                        <input type="checkbox" class="animal-checkbox h-4 w-4 text-primary focus:ring-primary border-border rounded" data-id="${animal.id}">
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Health Status:</span>
+                            <span class="status-badge ${healthStatusClass} capitalize">${animal.healthStatus}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Feeding Status:</span>
+                            <span class="status-badge ${feedingStatusClass} capitalize">${animal.feedingStatus}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Last Activity:</span>
+                            <span class="text-sm text-text-primary">${animal.lastActivity}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Enclosure:</span>
+                            <span class="text-sm text-text-primary">${animal.enclosure}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button onclick="event.stopPropagation(); logFeeding(${animal.id})" class="flex-1 px-3 py-2 text-xs bg-primary-50 text-primary rounded-md hover:bg-primary-100 transition-colors">
+                            <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            Feed
+                        </button>
+                        <button onclick="event.stopPropagation(); healthCheck(${animal.id})" class="flex-1 px-3 py-2 text-xs bg-success-50 text-success rounded-md hover:bg-success-100 transition-colors">
+                            <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Health
+                        </button>
+                        <button onclick="event.stopPropagation(); logBehavior(${animal.id})" class="flex-1 px-3 py-2 text-xs bg-accent-50 text-accent rounded-md hover:bg-accent-100 transition-colors">
+                            <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                            Notes
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function filterAnimals() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const speciesFilter = document.getElementById('speciesFilter').value;
+            const healthFilter = document.getElementById('healthFilter').value;
+            const feedingFilter = document.getElementById('feedingFilter').value;
+
+            filteredAnimals = mockAnimals.filter(animal => {
+                const matchesSearch = animal.name.toLowerCase().includes(searchTerm) || 
+                                    animal.species.toLowerCase().includes(searchTerm);
+                const matchesSpecies = !speciesFilter || animal.species === speciesFilter;
+                const matchesHealth = !healthFilter || animal.healthStatus === healthFilter;
+                const matchesFeeding = !feedingFilter || animal.feedingStatus === feedingFilter;
+
+                return matchesSearch && matchesSpecies && matchesHealth && matchesFeeding;
+            });
+
+            renderAnimals();
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('speciesFilter').value = '';
+            document.getElementById('healthFilter').value = '';
+            document.getElementById('feedingFilter').value = '';
+            filteredAnimals = [...mockAnimals];
+            renderAnimals();
+        }
+
+        function viewAnimalProfile(animalId) {
+            localStorage.setItem('selectedAnimalId', animalId);
+            window.location.href = 'animal_profile.html';
+        }
+
+        function logFeeding(animalId) {
+            window.location.href = 'feeding_management.html';
+        }
+
+        function healthCheck(animalId) {
+            window.location.href = 'health_monitoring.html';
+        }
+
+        function logBehavior(animalId) {
+            window.location.href = 'behavioral_tracking.html';
+        }
+
+        function showAddAnimalModal() {
+            document.getElementById('addAnimalModal').classList.remove('hidden');
+        }
+
+        function hideAddAnimalModal() {
+            document.getElementById('addAnimalModal').classList.add('hidden');
+        }
+
+        // Handle add animal form
+        document.getElementById('addAnimalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would normally send data to server
+            alert('Animal added successfully!');
+            hideAddAnimalModal();
+            this.reset();
+        });
+
+        // Handle bulk selection
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('animal-checkbox')) {
+                updateBulkActions();
+            }
+        });
+
+        document.getElementById('selectAll').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.animal-checkbox');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+            updateBulkActions();
+        });
+
+        function updateBulkActions() {
+            const selectedCheckboxes = document.querySelectorAll('.animal-checkbox:checked');
+            const count = selectedCheckboxes.length;
+            
+            document.getElementById('selectedCount').textContent = `${count} selected`;
+            
+            const bulkButtons = document.querySelectorAll('#bulkFeedBtn, #bulkHealthBtn');
+            bulkButtons.forEach(btn => {
+                if (count > 0) {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                } else {
+                    btn.disabled = true;
+                    btn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
